@@ -26,28 +26,6 @@ class Movie(models.Model):
     def __str__(self):
         return self.name
 
-class Seat(models.Model):
-
-    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
-    seat_no = models.IntegerField(validators=[
-            MaxValueValidator(50),
-            MinValueValidator(1)
-        ])
-    sold = models.BooleanField(default=False,null=True,blank=True)
-
-    def __str__(self):
-        return f"{str(self.seat_no)}----{self.movie.name}"
-
-class Ticket(models.Model):
-    # seat_no  = models.AutoField(primary_key=True)
-    seat_no = models.OneToOneField(Seat,on_delete=models.CASCADE, null=True, blank=True)
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    movie = models.ForeignKey(Movie,on_delete=models.CASCADE)
-
-
-    def __str__(self):
-        return f"{self.customer.user.username}--->-{self.seat_no}---< {self.movie.name}"
-
 ### ALL DONE
 class AMC(models.Model):
     city = models.ForeignKey(City, on_delete=models.CASCADE)
@@ -56,6 +34,27 @@ class AMC(models.Model):
 
     def __str__(self):
         return self.name
+
+class Seat(models.Model):
+    amc = models.ForeignKey(AMC,on_delete=models.SET_NULL, blank=True, null=True)
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+    seat_no = models.IntegerField(validators=[
+            MaxValueValidator(50),
+            MinValueValidator(1)
+        ])
+    sold = models.BooleanField(default=False,null=True,blank=True)
+
+    def __str__(self):
+        return f"seat no :{str(self.seat_no)}----id :{self.id} ---{self.movie.name}"
+
+class Ticket(models.Model):
+    # seat_no  = models.AutoField(primary_key=True)
+    seat_no = models.OneToOneField(Seat,on_delete=models.CASCADE, null=True, blank=True)
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    movie = models.ForeignKey(Movie,on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"ticket_id: {self.id}----seat id :{self.seat_no.id} ---{self.movie.name}"
 
 
 
