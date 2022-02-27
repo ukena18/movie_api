@@ -16,7 +16,7 @@
 #### Some Pictures of App
 
 ![overview](assets/movie1.png)
-![all the cities](assets/movie2.png)
+![all the cities](assets/moive2.png)
 ![all the theatre in the city and all the movie in the theatre](assets/movie3-4.png)
 ![overview](assets/movie5.png)
 
