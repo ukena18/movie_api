@@ -1,4 +1,5 @@
 from django.contrib import admin
+# Get all the db models
 from .models import Customer, City, AMC, Movie, Ticket, Seat
 
 

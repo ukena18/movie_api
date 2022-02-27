@@ -1,8 +1,8 @@
 from django.db import models
 
-# Create your models here.
 
 
+#just for testing it is dummy model that i will not use
 class Title(models.Model):
     title  = models.CharField(max_length=200)
     completed = models.BooleanField(default=False, null= True)
